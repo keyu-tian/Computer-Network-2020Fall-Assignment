@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-cn" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>爬虫代码文档 – 田柯宇 17375491 &mdash; Crawler 1.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> Crawler
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">爬虫代码文档 – 田柯宇 17375491</a></li>
+<li><a class="reference internal" href="#id2">简介</a></li>
+<li><a class="reference internal" href="#module-main">主程序</a></li>
+<li><a class="reference internal" href="#module-interface">crawler 爬虫</a></li>
+<li><a class="reference internal" href="#module-convert">data_cleaning 数据清洗</a></li>
+<li><a class="reference internal" href="#module-file_utils">utils 工具</a></li>
+<li><a class="reference internal" href="#module-sns">visualize 可视化</a></li>
+<li><a class="reference internal" href="#module-algorithm">辅助程序</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Crawler</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>爬虫代码文档 – 田柯宇 17375491</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>爬虫代码文档 – 田柯宇 17375491<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="id2">
+<h1>简介<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h1>
+<p><em>2020秋计算机网络大作业 – 田柯宇 17375491</em></p>
+<p>这是我的爬虫大作业项目文档。</p>
+</div>
+<div class="section" id="module-main">
+<span id="id3"></span><h1>主程序<a class="headerlink" href="#module-main" title="永久链接至标题">¶</a></h1>
+<dl class="py function">
+<dt id="main.main">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#main"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#main.main" title="永久链接至目标">¶</a></dt>
+<dd><p>构造爬虫；爬取并初步处理数据；处理、可视化最终数据并以 json 格式存储数据</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-interface">
+<span id="crawler"></span><h1>crawler 爬虫<a class="headerlink" href="#module-interface" title="永久链接至标题">¶</a></h1>
+<dl class="py class">
+<dt id="interface.AbsCrawler">
+<em class="property">class </em><code class="sig-prename descclassname">interface.</code><code class="sig-name descname">AbsCrawler</code><a class="reference internal" href="_modules/interface.html#AbsCrawler"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#interface.AbsCrawler" title="永久链接至目标">¶</a></dt>
+<dd><p>爬虫抽象类，需要实现符合规范的爬虫方法</p>
+<dl class="py method">
+<dt id="interface.AbsCrawler.crawling_epilogue">
+<em class="property">abstract </em><code class="sig-name descname">crawling_epilogue</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/interface.html#AbsCrawler.crawling_epilogue"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#interface.AbsCrawler.crawling_epilogue" title="永久链接至目标">¶</a></dt>
+<dd><p>爬取后续，包括数据的进一步处理、运算、可视化分析，以及最终 json 格式的存储
+:param args: 任意可能的变长参数
+:param kwargs: 任意可能的键值对参数
+:return: 不需要返回</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="interface.AbsCrawler.crawling_process">
+<em class="property">abstract </em><code class="sig-name descname">crawling_process</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>List<span class="p">, </span>List<span class="p">]</span><a class="reference internal" href="_modules/interface.html#AbsCrawler.crawling_process"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#interface.AbsCrawler.crawling_process" title="永久链接至目标">¶</a></dt>
+<dd><p>爬取过程，包括进行自动爬取、数据初步处理
+:param args: 任意可能的变长参数
+:param kwargs: 任意可能的键值对参数
+:return: 返回一个二元组，代表爬取原始数据和初步处理过的数据</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="interface.AbsCrawler.crawling_prologue">
+<em class="property">abstract </em><code class="sig-name descname">crawling_prologue</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="_modules/interface.html#AbsCrawler.crawling_prologue"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#interface.AbsCrawler.crawling_prologue" title="永久链接至目标">¶</a></dt>
+<dd><p>爬取前准备工作，包括链接自动生成、请求参数自动组合
+:param args: 任意可能的变长参数
+:param kwargs: 任意可能的键值对参数
+:return: 任意可能的返回</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="interface.AbsCrawler.register_developer_ak">
+<code class="sig-name descname">register_developer_ak</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app_key</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/interface.html#AbsCrawler.register_developer_ak"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#interface.AbsCrawler.register_developer_ak" title="永久链接至目标">¶</a></dt>
+<dd><p>注册百度地图开放平台开发者的应用密钥
+:param app_key: 应用密钥字符串
+:return: 无返回</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-impl"></span><dl class="py class">
+<dt id="impl.RingsRoadCrawler">
+<em class="property">class </em><code class="sig-prename descclassname">impl.</code><code class="sig-name descname">RingsRoadCrawler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timeout</span><span class="o">=</span><span class="default_value">20</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/impl.html#RingsRoadCrawler"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#impl.RingsRoadCrawler" title="永久链接至目标">¶</a></dt>
+<dd><p>环路的拥堵路况爬虫实现类，实现了对北京市二、三、四、五环各自的路段（东、南、西、北段）的集成爬取。</p>
+<dl class="py method">
+<dt id="impl.RingsRoadCrawler.crawling_epilogue">
+<code class="sig-name descname">crawling_epilogue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">save_path</span></em>, <em class="sig-param"><span class="n">raw_results</span></em>, <em class="sig-param"><span class="n">final_results</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/impl.html#RingsRoadCrawler.crawling_epilogue"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#impl.RingsRoadCrawler.crawling_epilogue" title="永久链接至目标">¶</a></dt>
+<dd><p>爬取后续，包括数据的进一步处理、运算、可视化分析，以及最终 json 格式的存储
+:param save_path: 存储最终 json 数据的路径
+:param raw_results: 爬取原始数据
+:param final_results: 初步处理过的数据
+:return: 不需要返回</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="impl.RingsRoadCrawler.crawling_process">
+<code class="sig-name descname">crawling_process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">all_params</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>List<span class="p">, </span>List<span class="p">]</span><a class="reference internal" href="_modules/impl.html#RingsRoadCrawler.crawling_process"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#impl.RingsRoadCrawler.crawling_process" title="永久链接至目标">¶</a></dt>
+<dd><p>爬取过程，按照提供的参数列表逐个爬取（自动聚合列表中的多个参数）
+:param all_params: 提供的参数列表（每个列表中有一个或多个爬取请求参数）
+:return: 返回一个二元组，代表爬取原始数据和初步处理过的数据</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="impl.RingsRoadCrawler.crawling_prologue">
+<code class="sig-name descname">crawling_prologue</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>List<span class="p">[</span>Dict<span class="p">]</span><span class="p">]</span><a class="reference internal" href="_modules/impl.html#RingsRoadCrawler.crawling_prologue"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#impl.RingsRoadCrawler.crawling_prologue" title="永久链接至目标">¶</a></dt>
+<dd><p>爬取前的预处理，自动生成待爬取的请求并返回请求列表
+:return: 请求参数列表（每个列表中有一个或多个爬取请求参数）</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="impl.RingsRoadCrawler.data_cleaning">
+<code class="sig-name descname">data_cleaning</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">json_result</span><span class="p">:</span> <span class="n">dict</span></em>, <em class="sig-param"><span class="n">congestion_elements</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/impl.html#RingsRoadCrawler.data_cleaning"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#impl.RingsRoadCrawler.data_cleaning" title="永久链接至目标">¶</a></dt>
+<dd><p>进行数据清洗（初步处理）
+:param json_result: 爬取的原始数据
+:param congestion_elements: 存放处理过的清洁数据的容器
+:return: 无返回</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="impl.RingsRoadCrawler.generate_road_name_lists">
+<code class="sig-name descname">generate_road_name_lists</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span><a class="reference internal" href="_modules/impl.html#RingsRoadCrawler.generate_road_name_lists"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#impl.RingsRoadCrawler.generate_road_name_lists" title="永久链接至目标">¶</a></dt>
+<dd><p>自动排列组合生成路段名（二、三、四、五环各自的东、南、西、北段）
+:return: 路段名列表</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="impl.RingsRoadCrawler.visualize_final_results">
+<code class="sig-name descname">visualize_final_results</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">final_results</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/impl.html#RingsRoadCrawler.visualize_final_results"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#impl.RingsRoadCrawler.visualize_final_results" title="永久链接至目标">¶</a></dt>
+<dd><p>可视化分析最终数据
+:param final_results: 最终数据
+:return: 无返回</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-convert">
+<span id="data-cleaning"></span><h1>data_cleaning 数据清洗<a class="headerlink" href="#module-convert" title="永久链接至标题">¶</a></h1>
+<dl class="py function">
+<dt id="convert.to_data_frame">
+<code class="sig-prename descclassname">convert.</code><code class="sig-name descname">to_data_frame</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df_dict</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/convert.html#to_data_frame"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#convert.to_data_frame" title="永久链接至目标">¶</a></dt>
+<dd><p>将字典型数据转换为 Pandas 框架的数据帧</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="convert.to_data_frame_dict">
+<code class="sig-prename descclassname">convert.</code><code class="sig-name descname">to_data_frame_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">final_results</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Dict<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="_modules/convert.html#to_data_frame_dict"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#convert.to_data_frame_dict" title="永久链接至目标">¶</a></dt>
+<dd><p>将最终结果（json解析后的对象格式）转换为 Pandas 框架需要的二维数据帧格式。
+过程中会进行数据清洗，自动过滤并处理不存在拥堵的情况。
+:param final_results: 最终结果（json解析后的对象格式）
+:return: Pandas 框架需要的二维数据帧字典</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="convert.to_heat_map_ndarray">
+<code class="sig-prename descclassname">convert.</code><code class="sig-name descname">to_heat_map_ndarray</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df_dict</span><span class="p">:</span> <span class="n">dict</span></em>, <em class="sig-param"><span class="n">core_w</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>numpy.ndarray<span class="p">, </span>numpy.ndarray<span class="p">]</span><a class="reference internal" href="_modules/convert.html#to_heat_map_ndarray"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#convert.to_heat_map_ndarray" title="永久链接至目标">¶</a></dt>
+<dd><p>将字典型数据转换为适用于热力图的 Numpy 框架多维数组</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-file_utils">
+<span id="utils"></span><h1>utils 工具<a class="headerlink" href="#module-file_utils" title="永久链接至标题">¶</a></h1>
+<dl class="py function">
+<dt id="file_utils.dump_json">
+<code class="sig-prename descclassname">file_utils.</code><code class="sig-name descname">dump_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">json_like_data</span></em>, <em class="sig-param"><span class="n">save_path</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">fname_prefix</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/file_utils.html#dump_json"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#file_utils.dump_json" title="永久链接至目标">¶</a></dt>
+<dd><p>集中以 json 格式存储文件
+:param json_like_data: json 格式的数据
+:param save_path: 存储路径
+:param fname_prefix: 文件名前缀（后缀为.json 自动补充）
+:return: 无返回</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="file_utils.time_str">
+<code class="sig-prename descclassname">file_utils.</code><code class="sig-name descname">time_str</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">in_fname</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/file_utils.html#time_str"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#file_utils.time_str" title="永久链接至目标">¶</a></dt>
+<dd><p>获取统一格式的时间字符串
+:param in_fname: 是否需要考虑文件名合法
+:return: 时间字符串</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-sns">
+<span id="visualize"></span><h1>visualize 可视化<a class="headerlink" href="#module-sns" title="永久链接至标题">¶</a></h1>
+<dl class="py function">
+<dt id="sns.render">
+<code class="sig-prename descclassname">sns.</code><code class="sig-name descname">render</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figure_name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sns.html#render"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#sns.render" title="永久链接至目标">¶</a></dt>
+<dd><p>使用 Matplotlib 框架展示所绘制的图
+:param figure_name: 图的题名
+:return: 无返回</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sns.vis_bins">
+<code class="sig-prename descclassname">sns.</code><code class="sig-name descname">vis_bins</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">val_key</span></em>, <em class="sig-param"><span class="n">figname</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">rev</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sns.html#vis_bins"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#sns.vis_bins" title="永久链接至目标">¶</a></dt>
+<dd><p>可视化箱线图（类似条形图；但通过了额外的黑线段对数据的离散程度进行了描述）
+:param df: 数据帧
+:param val_key: 被考虑的数值键
+:param figname: 图的标题
+:param rev: 色系是否翻转（是则为蓝绿，否则为红橙）
+:return: 无返回</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sns.vis_correlations">
+<code class="sig-prename descclassname">sns.</code><code class="sig-name descname">vis_correlations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">figname</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sns.html#vis_correlations"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#sns.vis_correlations" title="永久链接至目标">¶</a></dt>
+<dd><p>可视化相关性图（自动拟合回归曲线；阴影部分为置信区间）
+:param df: 数据帧
+:param figname: 图的标题
+:return: 无返回</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sns.vis_heat_map">
+<code class="sig-prename descclassname">sns.</code><code class="sig-name descname">vis_heat_map</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">heat_map_ndarray</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">figname</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">cmap</span><span class="o">=</span><span class="default_value">'Blues'</span></em>, <em class="sig-param"><span class="n">normalize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sns.html#vis_heat_map"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#sns.vis_heat_map" title="永久链接至目标">¶</a></dt>
+<dd><p>可视化热力图，用于非常直观地绘制二、三、四、五环的拥堵状况
+:param heat_map_ndarray: 热力图的多维数组
+:param figname: 图的标题
+:param cmap: 色系
+:param normalize: 是否需要自动归一化
+:return: 无返回</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-algorithm">
+<span id="id4"></span><h1>辅助程序<a class="headerlink" href="#module-algorithm" title="永久链接至标题">¶</a></h1>
+<dl class="py function">
+<dt id="algorithm.depth_first_search">
+<code class="sig-prename descclassname">algorithm.</code><code class="sig-name descname">depth_first_search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cwd</span></em>, <em class="sig-param"><span class="n">upd_fn</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/algorithm.html#depth_first_search"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#algorithm.depth_first_search" title="永久链接至目标">¶</a></dt>
+<dd><p>辅助函数，使用深度优先搜索递归遍历符合条件的文件并进行相关处理
+:param cwd:
+:param upd_fn:
+:return:</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, Tian Keyu
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

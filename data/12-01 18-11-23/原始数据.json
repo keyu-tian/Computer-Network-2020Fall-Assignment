@@ -1,0 +1,743 @@
+[
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "东二环：自北向南严重拥堵；自南向北轻微拥堵；北向南,从东直门北桥到左安门桥严重拥堵；东向北,从东便门桥到东直门北桥拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "自北向南严重拥堵；自南向北轻微拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 9160,
+            "speed": 10.06,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "北向南,从东直门北桥到左安门桥"
+          },
+          {
+            "congestion_distance": 5170,
+            "speed": 24.43,
+            "status": 3,
+            "congestion_trend": "缓解",
+            "section_desc": "东向北,从东便门桥到东直门北桥"
+          }
+        ],
+        "road_name": "东二环"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "南二环：自东向西畅通；自西向东拥堵；西向东,陶然桥附近拥堵；东向西,从陶然桥到菜户营桥拥堵。",
+    "evaluation": {
+      "status": 2,
+      "status_desc": "自东向西畅通；自西向东拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 840,
+            "speed": 18.46,
+            "status": 3,
+            "congestion_trend": "加重",
+            "section_desc": "西向东,陶然桥附近"
+          },
+          {
+            "congestion_distance": 3150,
+            "speed": 29.62,
+            "status": 3,
+            "congestion_trend": "持平",
+            "section_desc": "东向西,从陶然桥到菜户营桥"
+          }
+        ],
+        "road_name": "南二环"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "西二环：双向拥堵；东向南,从西直门桥到月坛北桥严重拥堵；西向北,从天宁寺桥到官园桥严重拥堵；北向南,从阜成门桥到广安门桥拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "双向拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 2770,
+            "speed": 11.12,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "东向南,从西直门桥到月坛北桥"
+          },
+          {
+            "congestion_distance": 3590,
+            "speed": 14.74,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "西向北,从天宁寺桥到官园桥"
+          },
+          {
+            "congestion_distance": 3720,
+            "speed": 17.72,
+            "status": 3,
+            "congestion_trend": "持平",
+            "section_desc": "北向南,从阜成门桥到广安门桥"
+          }
+        ],
+        "road_name": "西二环"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "北二环：自东向西拥堵；自西向东畅通；东向西,从东直门北桥到西直门桥严重拥堵。",
+    "evaluation": {
+      "status": 2,
+      "status_desc": "自东向西拥堵；自西向东畅通"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 6310,
+            "speed": 11.95,
+            "status": 4,
+            "congestion_trend": "加重",
+            "section_desc": "东向西,从东直门北桥到西直门桥"
+          }
+        ],
+        "road_name": "北二环"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "东三环南路：自北向南拥堵；自南向北畅通；北向南,劲松桥附近严重拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "自北向南拥堵；自南向北畅通"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 1050,
+            "speed": 16.61,
+            "status": 4,
+            "congestion_trend": "加重",
+            "section_desc": "北向南,劲松桥附近"
+          }
+        ],
+        "road_name": "东三环南路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "东三环北路：自北向南严重拥堵；自南向北拥堵；北向南,从三元东桥到京广桥严重拥堵；南向北,从京广桥到燕莎桥严重拥堵。",
+    "evaluation": {
+      "status": 4,
+      "status_desc": "自北向南严重拥堵；自南向北拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 3980,
+            "speed": 7.76,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "北向南,从三元东桥到京广桥"
+          },
+          {
+            "congestion_distance": 3200,
+            "speed": 12.53,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "南向北,从京广桥到燕莎桥"
+          }
+        ],
+        "road_name": "东三环北路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "南三环东路：自东向西拥堵；自西向东轻微拥堵；西向北,从方庄路南三环东路辅路到六防地漏严重拥堵；北向西,从横塘听雨到南三环东路辅路路口拥堵；东向西,南三环东路附近拥堵。",
+    "evaluation": {
+      "status": 2,
+      "status_desc": "自东向西拥堵；自西向东轻微拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 1920,
+            "speed": 13.16,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "西向北,从方庄路南三环东路辅路到六防地漏"
+          },
+          {
+            "congestion_distance": 700,
+            "speed": 17.93,
+            "status": 3,
+            "congestion_trend": "加重",
+            "section_desc": "北向西,从横塘听雨到南三环东路辅路路口"
+          },
+          {
+            "congestion_distance": 1140,
+            "speed": 24.64,
+            "status": 3,
+            "congestion_trend": "持平",
+            "section_desc": "东向西,南三环东路附近"
+          }
+        ],
+        "road_name": "南三环东路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "南三环西路：双向拥堵；西向东,从右安南桥到洋桥严重拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "双向拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 2210,
+            "speed": 17.9,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "西向东,从右安南桥到洋桥"
+          }
+        ],
+        "road_name": "南三环西路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "西三环南路：双向拥堵；南向北,从南三环西路到松荫壶畔严重拥堵；北向南,从六里桥小腰到万柳桥严重拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "双向拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 1700,
+            "speed": 15.75,
+            "status": 4,
+            "congestion_trend": "缓解",
+            "section_desc": "南向北,从南三环西路到松荫壶畔"
+          },
+          {
+            "congestion_distance": 2430,
+            "speed": 16.69,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "北向南,从六里桥小腰到万柳桥"
+          }
+        ],
+        "road_name": "西三环南路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "西三环北路：自北向南拥堵；自南向北轻微拥堵；北向南,从为公桥到航天桥严重拥堵；北向南,从为公桥到蒲公英北京青少年生命教育基P\u0000\u0000严重拥堵；南向北,从航天桥到花园桥拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "自北向南拥堵；自南向北轻微拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 2730,
+            "speed": 9.97,
+            "status": 4,
+            "congestion_trend": "缓解",
+            "section_desc": "北向南,从为公桥到航天桥"
+          },
+          {
+            "congestion_distance": 1340,
+            "speed": 11.67,
+            "status": 4,
+            "congestion_trend": "缓解",
+            "section_desc": "北向南,从为公桥到蒲公英北京青少年生命教育基P\u0000\u0000"
+          },
+          {
+            "congestion_distance": 620,
+            "speed": 23.72,
+            "status": 3,
+            "congestion_trend": "加重",
+            "section_desc": "南向北,从航天桥到花园桥"
+          }
+        ],
+        "road_name": "西三环北路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "北三环东路：自东向西轻微拥堵；自西向东拥堵；西向东,从和平东桥到三元东桥严重拥堵；东向西,从和平东桥到小黄庄路3条拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "自东向西轻微拥堵；自西向东拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 2640,
+            "speed": 15.96,
+            "status": 4,
+            "congestion_trend": "缓解",
+            "section_desc": "西向东,从和平东桥到三元东桥"
+          },
+          {
+            "congestion_distance": 1810,
+            "speed": 24.87,
+            "status": 3,
+            "congestion_trend": "持平",
+            "section_desc": "东向西,从和平东桥到小黄庄路3条"
+          }
+        ],
+        "road_name": "北三环东路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "北三环西路：自东向西拥堵；自西向东畅通；东向南,北三环西路附近严重拥堵；东向西,从学知桥到四通桥严重拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "自东向西拥堵；自西向东畅通"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 730,
+            "speed": 3.8,
+            "status": 4,
+            "congestion_trend": "加重",
+            "section_desc": "东向南,北三环西路附近"
+          },
+          {
+            "congestion_distance": 3770,
+            "speed": 15.02,
+            "status": 4,
+            "congestion_trend": "加重",
+            "section_desc": "东向西,从学知桥到四通桥"
+          }
+        ],
+        "road_name": "北三环西路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "东四环南路：自北向南畅通；自南向北轻微拥堵；南向北,从小武基桥到窑洼湖桥拥堵。",
+    "evaluation": {
+      "status": 2,
+      "status_desc": "自北向南畅通；自南向北轻微拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 3060,
+            "speed": 22.19,
+            "status": 3,
+            "congestion_trend": "持平",
+            "section_desc": "南向北,从小武基桥到窑洼湖桥"
+          }
+        ],
+        "road_name": "东四环南路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "东四环北路：拥堵；西向南,从四元桥到东风北桥严重拥堵；北向南,东四环北路附近严重拥堵；南向北,从朝阳公园桥到东风北桥严重拥堵；北向南,从东风北桥到东四环北路辅路路口拥堵；东向西,从东四环北路辅路路口到霄云桥拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 3050,
+            "speed": 11.32,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "西向南,从四元桥到东风北桥"
+          },
+          {
+            "congestion_distance": 780,
+            "speed": 16.69,
+            "status": 4,
+            "congestion_trend": "缓解",
+            "section_desc": "北向南,东四环北路附近"
+          },
+          {
+            "congestion_distance": 2110,
+            "speed": 17.45,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "南向北,从朝阳公园桥到东风北桥"
+          },
+          {
+            "congestion_distance": 1610,
+            "speed": 20.52,
+            "status": 3,
+            "congestion_trend": "缓解",
+            "section_desc": "北向南,从东风北桥到东四环北路辅路路口"
+          },
+          {
+            "congestion_distance": 570,
+            "speed": 21.59,
+            "status": 3,
+            "congestion_trend": "缓解",
+            "section_desc": "东向西,从东四环北路辅路路口到霄云桥"
+          }
+        ],
+        "road_name": "东四环北路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "南四环东路：自东向西拥堵；自西向东畅通；西向北,十八里店桥附近拥堵。",
+    "evaluation": {
+      "status": 2,
+      "status_desc": "自东向西拥堵；自西向东畅通"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 620,
+            "speed": 22.6,
+            "status": 3,
+            "congestion_trend": "持平",
+            "section_desc": "西向北,十八里店桥附近"
+          }
+        ],
+        "road_name": "南四环东路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "南四环西路：自东向西拥堵；自西向东畅通；东向西,从花乡桥到富丰桥严重拥堵。",
+    "evaluation": {
+      "status": 2,
+      "status_desc": "自东向西拥堵；自西向东畅通"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 2430,
+            "speed": 14.88,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "东向西,从花乡桥到富丰桥"
+          }
+        ],
+        "road_name": "南四环西路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "西四环南路：双向拥堵；南向北,从丰北桥到岳各庄桥严重拥堵；北向南,从岳各庄桥到看丹桥严重拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "双向拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 1860,
+            "speed": 11.08,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "南向北,从丰北桥到岳各庄桥"
+          },
+          {
+            "congestion_distance": 4090,
+            "speed": 12.43,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "北向南,从岳各庄桥到看丹桥"
+          }
+        ],
+        "road_name": "西四环南路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "西四环北路：自北向南拥堵；自南向北畅通；北向南,从远大桥到金沟河桥严重拥堵；北向南,从四海桥到远大桥严重拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "自北向南拥堵；自南向北畅通"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 3750,
+            "speed": 17.01,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "北向南,从远大桥到金沟河桥"
+          },
+          {
+            "congestion_distance": 1180,
+            "speed": 18.13,
+            "status": 4,
+            "congestion_trend": "缓解",
+            "section_desc": "北向南,从四海桥到远大桥"
+          }
+        ],
+        "road_name": "西四环北路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "北四环东路：自东向西畅通；自西向东拥堵；东向西,从惠新东桥到安慧桥拥堵。",
+    "evaluation": {
+      "status": 2,
+      "status_desc": "自东向西畅通；自西向东拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 2570,
+            "speed": 30.55,
+            "status": 3,
+            "congestion_trend": "持平",
+            "section_desc": "东向西,从惠新东桥到安慧桥"
+          }
+        ],
+        "road_name": "北四环东路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "北四环西路：双向拥堵；东向南,从展春桥到六郎庄桥严重拥堵；西向东,从六郎庄桥到展春二桥严重拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "双向拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 4460,
+            "speed": 15.46,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "东向南,从展春桥到六郎庄桥"
+          },
+          {
+            "congestion_distance": 3340,
+            "speed": 17.72,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "西向东,从六郎庄桥到展春二桥"
+          }
+        ],
+        "road_name": "北四环西路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "东五环路：双向拥堵；北向南,从环铁桥到远通桥严重拥堵；南向北,从小郊亭桥到平房桥严重拥堵；东向西,从化工桥到大羊坊桥严重拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "双向拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 8360,
+            "speed": 7.61,
+            "status": 4,
+            "congestion_trend": "加重",
+            "section_desc": "北向南,从环铁桥到远通桥"
+          },
+          {
+            "congestion_distance": 5970,
+            "speed": 9.65,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "南向北,从小郊亭桥到平房桥"
+          },
+          {
+            "congestion_distance": 2340,
+            "speed": 13.23,
+            "status": 4,
+            "congestion_trend": "加重",
+            "section_desc": "东向西,从化工桥到大羊坊桥"
+          }
+        ],
+        "road_name": "东五环路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "南五环路：轻微拥堵；南向东,南五环路附近严重拥堵；东向西,从敬贤桥到狼垡东桥严重拥堵；东向西,南五环路附近拥堵；北向南,西五环路附近拥堵。",
+    "evaluation": {
+      "status": 2,
+      "status_desc": "轻微拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 2810,
+            "speed": 14.59,
+            "status": 4,
+            "congestion_trend": "加重",
+            "section_desc": "南向东,南五环路附近"
+          },
+          {
+            "congestion_distance": 9020,
+            "speed": 19.23,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "东向西,从敬贤桥到狼垡东桥"
+          },
+          {
+            "congestion_distance": 1260,
+            "speed": 23.86,
+            "status": 3,
+            "congestion_trend": "持平",
+            "section_desc": "东向西,南五环路附近"
+          },
+          {
+            "congestion_distance": 1830,
+            "speed": 28.44,
+            "status": 3,
+            "congestion_trend": "持平",
+            "section_desc": "北向南,西五环路附近"
+          }
+        ],
+        "road_name": "南五环路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "西五环路：自北向南拥堵；自南向北畅通；北向南,从香泉桥到闵西桥严重拥堵；南向北,从八角桥到晋元桥拥堵。",
+    "evaluation": {
+      "status": 2,
+      "status_desc": "自北向南拥堵；自南向北畅通"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 2550,
+            "speed": 9.46,
+            "status": 4,
+            "congestion_trend": "加重",
+            "section_desc": "北向南,从香泉桥到闵西桥"
+          },
+          {
+            "congestion_distance": 1070,
+            "speed": 31.81,
+            "status": 3,
+            "congestion_trend": "缓解",
+            "section_desc": "南向北,从八角桥到晋元桥"
+          }
+        ],
+        "road_name": "西五环路"
+      }
+    ]
+  },
+  {
+    "status": 0,
+    "message": "成功",
+    "description": "北五环路：自东向西轻微拥堵；自西向东拥堵；西向东,从箭亭桥到上清桥严重拥堵；东向西,从北苑西桥到奥林西桥严重拥堵；东向西,从天辰桥到林萃东桥严重拥堵。",
+    "evaluation": {
+      "status": 3,
+      "status_desc": "自东向西轻微拥堵；自西向东拥堵"
+    },
+    "road_traffic": [
+      {
+        "congestion_sections": [
+          {
+            "congestion_distance": 1940,
+            "speed": 7.43,
+            "status": 4,
+            "congestion_trend": "加重",
+            "section_desc": "西向东,从箭亭桥到上清桥"
+          },
+          {
+            "congestion_distance": 1860,
+            "speed": 10.55,
+            "status": 4,
+            "congestion_trend": "加重",
+            "section_desc": "东向西,从北苑西桥到奥林西桥"
+          },
+          {
+            "congestion_distance": 1810,
+            "speed": 15.45,
+            "status": 4,
+            "congestion_trend": "持平",
+            "section_desc": "东向西,从天辰桥到林萃东桥"
+          }
+        ],
+        "road_name": "北五环路"
+      }
+    ]
+  }
+]

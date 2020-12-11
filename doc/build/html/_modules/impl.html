@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-cn" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>impl &mdash; Crawler 1.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Crawler
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Crawler</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">模块代码</a> &raquo;</li>
+        
+      <li>impl</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>impl 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1"># 2020/12/01</span>
+<span class="c1"># Copyright by Keyu Tian, College of Software, Beihang University.</span>
+<span class="c1"># This file is a part of my crawler assignment for Computer Network.</span>
+<span class="c1"># All rights reserved.</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">itt</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">crawler.interface</span> <span class="kn">import</span> <span class="n">AbsCrawler</span>
+<span class="kn">from</span> <span class="nn">data_cleaning.convert</span> <span class="kn">import</span> <span class="n">to_data_frame_dict</span><span class="p">,</span> <span class="n">to_heat_map_ndarray</span><span class="p">,</span> <span class="n">to_data_frame</span><span class="p">,</span> <span class="n">dist_key</span><span class="p">,</span> <span class="n">speed_key</span>
+<span class="kn">from</span> <span class="nn">utils.file_utils</span> <span class="kn">import</span> <span class="n">dump_json</span>
+<span class="kn">from</span> <span class="nn">visualize.sns</span> <span class="kn">import</span> <span class="n">vis_heat_map</span><span class="p">,</span> <span class="n">vis_correlations</span><span class="p">,</span> <span class="n">vis_bins</span>
+
+
+<div class="viewcode-block" id="RingsRoadCrawler"><a class="viewcode-back" href="../index.html#impl.RingsRoadCrawler">[文档]</a><span class="k">class</span> <span class="nc">RingsRoadCrawler</span><span class="p">(</span><span class="n">AbsCrawler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    环路的拥堵路况爬虫实现类，实现了对北京市二、三、四、五环各自的路段（东、南、西、北段）的集成爬取。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        初始化爬虫</span>
+<span class="sd">        :param timeout: 爬取的最长等待时间</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RingsRoadCrawler</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">ring_nums</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_to_ch</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;二&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;三&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;四&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;五&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ch_to_num</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_to_ch</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">directions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;东&#39;</span><span class="p">,</span> <span class="s1">&#39;南&#39;</span><span class="p">,</span> <span class="s1">&#39;西&#39;</span><span class="p">,</span> <span class="s1">&#39;北&#39;</span><span class="p">]</span>
+        <span class="n">ring_names</span> <span class="o">=</span> <span class="n">itt</span><span class="o">.</span><span class="n">product</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_to_ch</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">directions</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ring_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tup</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;环&#39;</span><span class="p">,</span>
+                <span class="n">ring_names</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    
+<div class="viewcode-block" id="RingsRoadCrawler.generate_road_name_lists"><a class="viewcode-back" href="../index.html#impl.RingsRoadCrawler.generate_road_name_lists">[文档]</a>    <span class="k">def</span> <span class="nf">generate_road_name_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        自动排列组合生成路段名（二、三、四、五环各自的东、南、西、北段）</span>
+<span class="sd">        :return: 路段名列表</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tails</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">),</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;东&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;南&#39;</span><span class="p">,</span> <span class="s1">&#39;北&#39;</span><span class="p">],</span> <span class="s1">&#39;南&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;东&#39;</span><span class="p">,</span> <span class="s1">&#39;西&#39;</span><span class="p">],</span> <span class="s1">&#39;西&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;南&#39;</span><span class="p">,</span> <span class="s1">&#39;北&#39;</span><span class="p">],</span> <span class="s1">&#39;北&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;东&#39;</span><span class="p">,</span> <span class="s1">&#39;西&#39;</span><span class="p">]},</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;东&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;南&#39;</span><span class="p">,</span> <span class="s1">&#39;北&#39;</span><span class="p">],</span> <span class="s1">&#39;南&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;东&#39;</span><span class="p">,</span> <span class="s1">&#39;西&#39;</span><span class="p">],</span> <span class="s1">&#39;西&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;南&#39;</span><span class="p">,</span> <span class="s1">&#39;北&#39;</span><span class="p">],</span> <span class="s1">&#39;北&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;东&#39;</span><span class="p">,</span> <span class="s1">&#39;西&#39;</span><span class="p">]},</span>
+            <span class="mi">5</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">road_name_lists</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring_nums</span><span class="p">:</span>
+            <span class="n">ch_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_to_ch</span><span class="p">[</span><span class="n">num</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">directions</span><span class="p">:</span>
+                <span class="n">suffixes</span> <span class="o">=</span> <span class="n">tails</span><span class="p">[</span><span class="n">num</span><span class="p">][</span><span class="n">d</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">suffixes</span><span class="p">):</span>
+                    <span class="n">road_name_lists</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">d</span><span class="si">}{</span><span class="n">ch_num</span><span class="si">}</span><span class="s1">环</span><span class="si">{</span><span class="n">s</span><span class="si">}{</span><span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="s2">&quot;路&quot;</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">suffixes</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">road_name_lists</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">d</span><span class="si">}{</span><span class="n">ch_num</span><span class="si">}</span><span class="s1">环</span><span class="si">{</span><span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="s2">&quot;路&quot;</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">road_name_lists</span></div>
+    
+<div class="viewcode-block" id="RingsRoadCrawler.crawling_prologue"><a class="viewcode-back" href="../index.html#impl.RingsRoadCrawler.crawling_prologue">[文档]</a>    <span class="k">def</span> <span class="nf">crawling_prologue</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        爬取前的预处理，自动生成待爬取的请求并返回请求列表</span>
+<span class="sd">        :return: 请求参数列表（每个列表中有一个或多个爬取请求参数）</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">all_params</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">road_name_list</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_road_name_lists</span><span class="p">():</span>
+            <span class="n">paras</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s1">&#39;ak&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">app_key</span><span class="p">,</span>
+                    <span class="s1">&#39;road_name&#39;</span><span class="p">:</span> <span class="n">road_name</span><span class="p">,</span>
+                    <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;110000&#39;</span><span class="p">,</span>
+                <span class="p">}</span> <span class="k">for</span> <span class="n">road_name</span> <span class="ow">in</span> <span class="n">road_name_list</span>
+            <span class="p">]</span>
+            <span class="n">all_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">paras</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">all_params</span></div>
+    
+<div class="viewcode-block" id="RingsRoadCrawler.data_cleaning"><a class="viewcode-back" href="../index.html#impl.RingsRoadCrawler.data_cleaning">[文档]</a>    <span class="k">def</span> <span class="nf">data_cleaning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">congestion_elements</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        进行数据清洗（初步处理）</span>
+<span class="sd">        :param json_result: 爬取的原始数据</span>
+<span class="sd">        :param congestion_elements: 存放处理过的清洁数据的容器</span>
+<span class="sd">        :return: 无返回</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="n">json_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;road_traffic&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>  <span class="c1"># 过滤失效数据</span>
+        
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="n">congestion_sections</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;congestion_sections&#39;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="n">congestion_sections</span><span class="p">:</span>
+                <span class="n">congestion_elements</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s1">&#39;拥堵路段长度&#39;</span><span class="p">:</span> <span class="n">sec</span><span class="p">[</span><span class="s1">&#39;congestion_distance&#39;</span><span class="p">],</span>  <span class="c1"># 拥堵路段长度, int</span>
+                    <span class="s1">&#39;平均拥堵时速&#39;</span><span class="p">:</span> <span class="n">sec</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span>  <span class="c1"># 平均通行速度, float</span>
+                    <span class="s1">&#39;拥堵状态&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;未知&#39;</span><span class="p">,</span>
+                        <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;稍缓&#39;</span><span class="p">,</span>
+                        <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;缓行&#39;</span><span class="p">,</span>
+                        <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;拥堵&#39;</span><span class="p">,</span>
+                        <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;严重拥堵&#39;</span><span class="p">,</span>
+                    <span class="p">}[</span><span class="n">sec</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]],</span>
+                    <span class="s1">&#39;拥堵趋势&#39;</span><span class="p">:</span> <span class="n">sec</span><span class="p">[</span><span class="s1">&#39;congestion_trend&#39;</span><span class="p">],</span>  <span class="c1"># 发展态势中文描述: 持平; 缓解; 加重</span>
+                    <span class="s1">&#39;情况描述&#39;</span><span class="p">:</span> <span class="n">sec</span><span class="p">[</span><span class="s1">&#39;section_desc&#39;</span><span class="p">],</span>  <span class="c1"># 具体区域中文描述</span>
+                <span class="p">})</span></div>
+    
+<div class="viewcode-block" id="RingsRoadCrawler.crawling_process"><a class="viewcode-back" href="../index.html#impl.RingsRoadCrawler.crawling_process">[文档]</a>    <span class="k">def</span> <span class="nf">crawling_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">all_params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        爬取过程，按照提供的参数列表逐个爬取（自动聚合列表中的多个参数）</span>
+<span class="sd">        :param all_params: 提供的参数列表（每个列表中有一个或多个爬取请求参数）</span>
+<span class="sd">        :return: 返回一个二元组，代表爬取原始数据和初步处理过的数据</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">raw_results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">final_results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_params</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="n">all_params</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">ring_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring_names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">congestion_elements</span> <span class="o">=</span> <span class="p">[]</span>
+            
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+                <span class="n">html_result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                    <span class="s1">&#39;http://api.map.baidu.com/traffic/v1/road&#39;</span><span class="p">,</span>
+                    <span class="n">params</span><span class="o">=</span><span class="n">param</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">AbsCrawler</span><span class="o">.</span><span class="n">request_headers</span><span class="p">,</span>
+                    <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span>
+                <span class="p">)</span>
+                <span class="n">json_result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">html_result</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+                <span class="n">raw_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_result</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data_cleaning</span><span class="p">(</span><span class="n">json_result</span><span class="p">,</span> <span class="n">congestion_elements</span><span class="p">)</span>
+            
+            <span class="n">final_results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;环路名称&#39;</span><span class="p">:</span> <span class="n">ring_name</span><span class="p">,</span> <span class="s1">&#39;环路拥堵状态&#39;</span><span class="p">:</span> <span class="n">congestion_elements</span><span class="p">})</span>
+        
+        <span class="k">return</span> <span class="n">raw_results</span><span class="p">,</span> <span class="n">final_results</span></div>
+    
+<div class="viewcode-block" id="RingsRoadCrawler.crawling_epilogue"><a class="viewcode-back" href="../index.html#impl.RingsRoadCrawler.crawling_epilogue">[文档]</a>    <span class="k">def</span> <span class="nf">crawling_epilogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save_path</span><span class="p">,</span> <span class="n">raw_results</span><span class="p">,</span> <span class="n">final_results</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        爬取后续，包括数据的进一步处理、运算、可视化分析，以及最终 json 格式的存储</span>
+<span class="sd">        :param save_path: 存储最终 json 数据的路径</span>
+<span class="sd">        :param raw_results: 爬取原始数据</span>
+<span class="sd">        :param final_results: 初步处理过的数据</span>
+<span class="sd">        :return: 不需要返回</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dump_json</span><span class="p">(</span><span class="n">raw_results</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="n">save_path</span><span class="p">,</span> <span class="n">fname_prefix</span><span class="o">=</span><span class="s1">&#39;原始数据&#39;</span><span class="p">)</span>
+        <span class="n">dump_json</span><span class="p">(</span><span class="n">final_results</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="n">save_path</span><span class="p">,</span> <span class="n">fname_prefix</span><span class="o">=</span><span class="s1">&#39;最终数据&#39;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">visualize_final_results</span><span class="p">(</span><span class="n">final_results</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="RingsRoadCrawler.visualize_final_results"><a class="viewcode-back" href="../index.html#impl.RingsRoadCrawler.visualize_final_results">[文档]</a>    <span class="k">def</span> <span class="nf">visualize_final_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">final_results</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        可视化分析最终数据</span>
+<span class="sd">        :param final_results: 最终数据</span>
+<span class="sd">        :return: 无返回</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df_dict</span> <span class="o">=</span> <span class="n">to_data_frame_dict</span><span class="p">(</span><span class="n">final_results</span><span class="p">)</span>
+        <span class="n">dist_heat_map</span><span class="p">,</span> <span class="n">speed_heat_map</span> <span class="o">=</span> <span class="n">to_heat_map_ndarray</span><span class="p">(</span><span class="n">df_dict</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">to_data_frame</span><span class="p">(</span><span class="n">df_dict</span><span class="p">)</span>
+        
+        <span class="n">vis_bins</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">dist_key</span><span class="p">,</span> <span class="s1">&#39;拥堵距离统计&#39;</span><span class="p">,</span> <span class="n">rev</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">vis_bins</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">speed_key</span><span class="p">,</span> <span class="s1">&#39;拥堵时速统计&#39;</span><span class="p">,</span> <span class="n">rev</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">vis_correlations</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;拥堵距离与拥堵时速相关性一览&#39;</span><span class="p">)</span>
+        <span class="n">vis_heat_map</span><span class="p">(</span><span class="n">dist_heat_map</span><span class="p">,</span> <span class="s1">&#39;各环拥堵距离(km)一览&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">)</span>
+        <span class="n">vis_heat_map</span><span class="p">(</span><span class="n">speed_heat_map</span><span class="p">,</span> <span class="s1">&#39;各环拥堵时速(km/h)一览&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, Tian Keyu
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

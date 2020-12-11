@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-cn" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sns &mdash; Crawler 1.0 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Crawler
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Crawler</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">模块代码</a> &raquo;</li>
+        
+      <li>sns</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>sns 源代码</h1><div class="highlight"><pre>
+<span></span><span class="c1"># 2020/12/01</span>
+<span class="c1"># Copyright by Keyu Tian, College of Software, Beihang University.</span>
+<span class="c1"># This file is a part of my crawler assignment for Computer Network.</span>
+<span class="c1"># All rights reserved.</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">data_cleaning.convert</span> <span class="kn">import</span> <span class="n">dist_key</span><span class="p">,</span> <span class="n">speed_key</span><span class="p">,</span> <span class="n">road_name_and_num_key</span><span class="p">,</span> <span class="n">road_dir_key</span><span class="p">,</span> <span class="n">road_num_key</span><span class="p">,</span> <span class="n">road_name_key</span><span class="p">,</span> <span class="n">trend_key</span>
+
+
+<div class="viewcode-block" id="render"><a class="viewcode-back" href="../index.html#sns.render">[文档]</a><span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">figure_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    使用 Matplotlib 框架展示所绘制的图</span>
+<span class="sd">    :param figure_name: 图的题名</span>
+<span class="sd">    :return: 无返回</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ax = plt.gca()</span>
+    <span class="c1"># ax.spines[&#39;top&#39;].set_visible(False)</span>
+    <span class="c1"># ax.spines[&#39;right&#39;].set_visible(False)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SimHei&#39;</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;SimHei&#39;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">figure_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">figure_name</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">})</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="vis_bins"><a class="viewcode-back" href="../index.html#sns.vis_bins">[文档]</a><span class="k">def</span> <span class="nf">vis_bins</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">val_key</span><span class="p">,</span> <span class="n">figname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rev</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    可视化箱线图（类似条形图；但通过了额外的黑线段对数据的离散程度进行了描述）</span>
+<span class="sd">    :param df: 数据帧</span>
+<span class="sd">    :param val_key: 被考虑的数值键</span>
+<span class="sd">    :param figname: 图的标题</span>
+<span class="sd">    :param rev: 色系是否翻转（是则为蓝绿，否则为红橙）</span>
+<span class="sd">    :return: 无返回</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+        <span class="n">palette</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Spectral</span><span class="si">{</span><span class="s2">&quot;_r&quot;</span> <span class="k">if</span> <span class="n">rev</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">n_colors</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">road_name_and_num_key</span><span class="p">]))),</span>
+        <span class="c1"># palette=sns.cubehelix_palette(n_colors=len(candidates), start=0.6, rot=.2, light=.77),</span>
+        <span class="c1"># palette=sns.cubehelix_palette(n_colors=len(candidates), start=.2, rot=-.3, light=.77),</span>
+        <span class="c1"># palette=sns.hls_palette(len(candidates), h=0.01, l=0.4, s=0.8),</span>
+        <span class="n">style</span><span class="o">=</span><span class="s1">&#39;ticks&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s1">&#39;talk&#39;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">road_dir_key</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">val_key</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="n">road_num_key</span><span class="p">,</span>
+        <span class="c1"># hue_order=candidates,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">()</span>
+    
+    <span class="c1"># plt.xlabel(, labelpad=20)</span>
+    <span class="c1"># plt.ylabel(val_key, labelpad=20)</span>
+    
+    <span class="n">render</span><span class="p">(</span><span class="n">figure_name</span><span class="o">=</span><span class="n">figname</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="vis_correlations"><a class="viewcode-back" href="../index.html#sns.vis_correlations">[文档]</a><span class="k">def</span> <span class="nf">vis_correlations</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">figname</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    可视化相关性图（自动拟合回归曲线；阴影部分为置信区间）</span>
+<span class="sd">    :param df: 数据帧</span>
+<span class="sd">    :param figname: 图的标题</span>
+<span class="sd">    :return: 无返回</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+        <span class="c1"># palette=&#39;Blues_r&#39;,</span>
+        <span class="n">style</span><span class="o">=</span><span class="s1">&#39;darkgrid&#39;</span>
+    <span class="p">)</span>
+    
+    <span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">dist_key</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">speed_key</span><span class="p">,</span>
+        <span class="n">col</span><span class="o">=</span><span class="n">road_name_key</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">render</span><span class="p">(</span><span class="n">figure_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="vis_heat_map"><a class="viewcode-back" href="../index.html#sns.vis_heat_map">[文档]</a><span class="k">def</span> <span class="nf">vis_heat_map</span><span class="p">(</span><span class="n">heat_map_ndarray</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">figname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    可视化热力图，用于非常直观地绘制二、三、四、五环的拥堵状况</span>
+<span class="sd">    :param heat_map_ndarray: 热力图的多维数组</span>
+<span class="sd">    :param figname: 图的标题</span>
+<span class="sd">    :param cmap: 色系</span>
+<span class="sd">    :param normalize: 是否需要自动归一化</span>
+<span class="sd">    :return: 无返回</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>
+        <span class="n">mi</span><span class="p">,</span> <span class="n">ma</span> <span class="o">=</span> <span class="n">heat_map_ndarray</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">heat_map_ndarray</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">heat_map_ndarray</span> <span class="o">=</span> <span class="p">(</span><span class="n">heat_map_ndarray</span> <span class="o">-</span> <span class="n">mi</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ma</span> <span class="o">-</span> <span class="n">mi</span><span class="p">)</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s1">&#39;talk&#39;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+        <span class="n">heat_map_ndarray</span><span class="p">,</span>
+        <span class="c1"># vmax=1,</span>
+        <span class="c1"># vmin=0,</span>
+        <span class="n">annot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+        <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xticklabels</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="c1"># plt.xlabel(&#39;date&#39;, fontdict={&#39;size&#39;: 20}, labelpad=10)</span>
+    <span class="c1"># plt.ylabel(&#39;province&#39;, fontdict={&#39;size&#39;: 20}, labelpad=13)</span>
+    <span class="n">render</span><span class="p">(</span><span class="n">figname</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, Tian Keyu
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
